@@ -109,14 +109,23 @@ STRICT CONSTRAINTS:
    - Heads-up: Call out any overlapping events, tight turnarounds, or things needing prep.
 3. Be calm, motivating, and direct. No filler or fluff. Plain text with clean markdown bullets (no HTML tags).`;
 
+  const candidateModels = [
+    { name: 'gemini-2.0-flash', version: 'v1beta' },
+    { name: 'gemini-1.5-flash-latest', version: 'v1beta' },
+    { name: 'gemini-1.5-flash', version: 'v1' },
+    { name: 'gemini-1.5-flash', version: 'v1beta' },
+    { name: 'gemini-2.0-flash-exp', version: 'v1beta' },
+    { name: 'gemini-1.5-pro', version: 'v1beta' },
+    { name: 'gemini-pro', version: 'v1' }
+  ];
+
   try {
-    const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
     let responseData = null;
     let lastError = null;
 
-    for (const model of models) {
+    for (const { name: model, version } of candidateModels) {
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/${version}/models/${model}:generateContent?key=${apiKey}`;
         const geminiRes = await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -138,7 +147,7 @@ STRICT CONSTRAINTS:
 
         if (!geminiRes.ok) {
           const errText = await geminiRes.text();
-          lastError = new Error(`Gemini API (${model}) failed with status ${geminiRes.status}: ${errText}`);
+          lastError = new Error(`Gemini API (${model} / ${version}) failed with status ${geminiRes.status}: ${errText}`);
           continue;
         }
 
@@ -146,6 +155,37 @@ STRICT CONSTRAINTS:
         if (responseData) break;
       } catch (err) {
         lastError = err;
+      }
+    }
+
+    // Dynamic discovery fallback if standard names all failed
+    if (!responseData) {
+      try {
+        const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        if (listRes.ok) {
+          const listData = await listRes.json();
+          const usable = listData.models?.filter(m =>
+            Array.isArray(m.supportedGenerationMethods) &&
+            m.supportedGenerationMethods.includes('generateContent')
+          );
+          if (usable && usable.length > 0) {
+            const dynamicModel = usable[0].name.replace(/^models\//, '');
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${dynamicModel}:generateContent?key=${apiKey}`;
+            const dynRes = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\nACTIVE UPCOMING EVENTS:\n${eventSummaries}` }] }],
+                generationConfig: { temperature: 0.2, maxOutputTokens: 300 }
+              })
+            });
+            if (dynRes.ok) {
+              responseData = await dynRes.json();
+            }
+          }
+        }
+      } catch (listErr) {
+        console.error('ListModels fallback failed:', listErr);
       }
     }
 

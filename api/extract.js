@@ -185,14 +185,31 @@ Instructions:
 5. If the time says e.g. "sharp 2 PM", time is "14:00". If "midnight", time is "23:59".
 6. Respond with ONLY raw JSON (an array of objects).`;
 
+  const candidateModels = [
+    { name: 'gemini-2.0-flash', version: 'v1beta' },
+    { name: 'gemini-1.5-flash-latest', version: 'v1beta' },
+    { name: 'gemini-1.5-flash', version: 'v1' },
+    { name: 'gemini-1.5-flash', version: 'v1beta' },
+    { name: 'gemini-2.0-flash-exp', version: 'v1beta' },
+    { name: 'gemini-1.5-pro', version: 'v1beta' },
+    { name: 'gemini-pro', version: 'v1' }
+  ];
+
   try {
-    const models = ['gemini-2.5-flash', 'gemini-1.5-flash'];
     let responseData = null;
     let lastError = null;
 
-    for (const model of models) {
+    for (const { name: model, version } of candidateModels) {
       try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/${version}/models/${model}:generateContent?key=${apiKey}`;
+        const generationConfig = {
+          temperature: 0.1
+        };
+        // Enable JSON mode for modern models
+        if (version === 'v1beta') {
+          generationConfig.responseMimeType = 'application/json';
+        }
+
         const geminiRes = await fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -205,16 +222,13 @@ Instructions:
                 ]
               }
             ],
-            generationConfig: {
-              temperature: 0.1,
-              responseMimeType: 'application/json'
-            }
+            generationConfig
           })
         });
 
         if (!geminiRes.ok) {
           const errText = await geminiRes.text();
-          lastError = new Error(`Gemini API (${model}) failed with status ${geminiRes.status}: ${errText}`);
+          lastError = new Error(`Gemini API (${model} / ${version}) failed with status ${geminiRes.status}: ${errText}`);
           continue; // try next model
         }
 
@@ -222,6 +236,37 @@ Instructions:
         if (responseData) break;
       } catch (err) {
         lastError = err;
+      }
+    }
+
+    // Dynamic discovery fallback if standard names all failed
+    if (!responseData) {
+      try {
+        const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        if (listRes.ok) {
+          const listData = await listRes.json();
+          const usable = listData.models?.filter(m =>
+            Array.isArray(m.supportedGenerationMethods) &&
+            m.supportedGenerationMethods.includes('generateContent')
+          );
+          if (usable && usable.length > 0) {
+            const dynamicModel = usable[0].name.replace(/^models\//, '');
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${dynamicModel}:generateContent?key=${apiKey}`;
+            const dynRes = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\nINPUT TEXT TO PARSE:\n"""\n${text}\n"""` }] }],
+                generationConfig: { temperature: 0.1 }
+              })
+            });
+            if (dynRes.ok) {
+              responseData = await dynRes.json();
+            }
+          }
+        }
+      } catch (listErr) {
+        console.error('ListModels fallback failed in extract:', listErr);
       }
     }
 
