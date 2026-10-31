@@ -201,3 +201,4 @@ Campus Pulse is pre-configured for **zero-config deployment on Vercel**:
 
 ## 📄 License
 MIT &copy; Campus Pulse Team
+

@@ -106,3 +106,4 @@ describe('/api/digest route handling', () => {
     expect(res.data.digest).toContain('expired');
   });
 });
+

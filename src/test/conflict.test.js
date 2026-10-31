@@ -72,3 +72,4 @@ describe('Conflict Detection Logic', () => {
     expect(warning).toBe('Schedule conflict with "Robotics Club" at 14:30');
   });
 });
+

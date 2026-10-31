@@ -79,3 +79,4 @@ describe('Duplicate Detection Logic', () => {
     expect(duplicates[0].candidate.title).toBe('Operating Systems Midterm');
   });
 });
+

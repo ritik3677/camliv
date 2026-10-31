@@ -121,3 +121,4 @@ export function getConflictWarning(eventId, conflictMap = {}) {
 
   return `Schedule conflict with ${conflicts.length} other events`;
 }
+

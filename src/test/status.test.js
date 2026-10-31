@@ -53,3 +53,4 @@ describe('Event Status Logic', () => {
     expect(isNeedsAttention({ date: '2026-10-25' }, mockNow)).toBe(false);
   });
 });
+

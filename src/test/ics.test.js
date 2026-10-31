@@ -82,3 +82,4 @@ describe('iCalendar (.ics) Generation', () => {
     expect(getIcsFilename('')).toBe('campus-event.ics');
   });
 });
+

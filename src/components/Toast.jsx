@@ -20,3 +20,4 @@ export default function Toast({ message, onDismiss, duration = 3000 }) {
     </div>
   );
 }
+

@@ -45,3 +45,4 @@ describe('Date Resolution & Formatting Logic', () => {
     expect(todayCell.isCurrentMonth).toBe(true);
   });
 });
+
