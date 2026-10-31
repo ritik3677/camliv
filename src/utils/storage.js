@@ -2,8 +2,9 @@
  * Storage and sample data utilities for Campus Pulse.
  */
 
-const STORAGE_KEY = 'campus_pulse_events_v1';
-const THEME_KEY = 'campus_pulse_theme';
+const STORAGE_KEY = 'camliv_events_v1';
+const LEGACY_STORAGE_KEY = 'campus_pulse_events_v1';
+const THEME_KEY = 'camliv_theme';
 
 /**
  * Realistic messy WhatsApp forward containing 3-4 campus events with dates, times, venues, and reminders.
@@ -113,7 +114,11 @@ export function loadSavedEvents() {
   }
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    let raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      // Check legacy key
+      raw = window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    }
     if (!raw) {
       // First time user: provide sample events so they see the power immediately
       const initial = getInitialDemoEvents();

@@ -1,4 +1,4 @@
-# Campus Pulse ⚡
+# CamLiv ⚡
 
 > **Intelligent, zero-friction campus life organizer.** Turn scattered WhatsApp forwards, emails, and poster captions into clear, actionable deadlines and calendar events in seconds.
 
@@ -15,14 +15,14 @@ College students are bombarded daily with scattered announcements:
 - Faculty emails with vague subject lines
 - Poster captions and club notices
 
-Students miss critical assignment submission windows, clash overlapping lab viva sessions with hackathons, and scramble for exam timings. **Campus Pulse** gives students one unified, intelligent home where they can paste messy text and immediately receive:
+Students miss critical assignment submission windows, clash overlapping lab viva sessions with hackathons, and scramble for exam timings. **CamLiv** gives students one unified, intelligent home where they can paste messy text and immediately receive:
 1. **Clean, structured event cards** (Exams, Assignments, Clubs, Sports, Placements).
 2. **Instant conflict detection** for overlapping exam or event times.
 3. **Automatic priority badges** (Today, Urgent within 48h, Upcoming, Expired) computed deterministically in code.
 4. **One-click iCalendar (.ics) export** for Google Calendar, Apple Calendar, and Outlook.
 5. **AI-powered 150-word Weekly Briefings** summarizing priorities, day-by-day agendas, and heads-up warnings.
 
-A first-time user can understand and use Campus Pulse immediately without any instructions.
+A first-time user can understand and use CamLiv immediately without any instructions.
 
 ---
 
@@ -36,7 +36,7 @@ A first-time user can understand and use Campus Pulse immediately without any in
 - **Testing:** Vitest with jsdom (40 comprehensive unit tests).
 
 ```
-campus-pulse/
+camliv/
 ├── api/                     # Vercel serverless functions (secure backend)
 │   ├── extract.js           # Smart event extraction via Gemini API
 │   └── digest.js            # Weekly AI briefing synthesizer (<150 words)
@@ -143,8 +143,8 @@ campus-pulse/
 
 ### 1. Clone & Install
 ```bash
-git clone <repo-url>
-cd campus-pulse
+git clone https://github.com/ritik3677/camliv.git
+cd camliv
 npm install
 ```
 
@@ -200,5 +200,5 @@ Campus Pulse is pre-configured for **zero-config deployment on Vercel**:
 ---
 
 ## 📄 License
-MIT &copy; Campus Pulse Team
+MIT &copy; CamLiv Team
 

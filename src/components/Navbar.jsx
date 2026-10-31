@@ -19,7 +19,7 @@ export default function Navbar({
         </div>
         <div>
           <h1 className="brand-title">
-            Campus Pulse
+            CamLiv
             <span className="badge-beta">v1.0</span>
           </h1>
           <p className="brand-subtitle">

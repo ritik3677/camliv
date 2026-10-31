@@ -95,7 +95,7 @@ export default async function handler(req, res) {
     return `- [${ev.category || 'Event'}] "${ev.title}": ${ev.date || 'TBD'}${timeStr}${venueStr}`;
   }).join('\n');
 
-  const systemPrompt = `You are Campus Pulse, an intelligent executive student assistant.
+  const systemPrompt = `You are CamLiv, an intelligent executive student assistant.
 Today's Date: ${referenceDate}.
 
 Your task is to produce a high-impact, crystal-clear weekly briefing for a busy university student based ONLY on their upcoming active events below.
