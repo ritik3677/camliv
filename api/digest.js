@@ -81,7 +81,7 @@ export default async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = (process.env.GEMINI_API_KEY || '').replace(/^["']|["']$/g, '').trim();
   if (!apiKey) {
     return res.status(500).json({
       error: 'GEMINI_API_KEY environment variable is not configured. Please set it in your deployment settings or .env file.'
@@ -110,25 +110,27 @@ STRICT CONSTRAINTS:
 3. Be calm, motivating, and direct. No filler or fluff. Plain text with clean markdown bullets (no HTML tags).`;
 
   const candidateModels = [
-    { name: 'gemini-2.0-flash', version: 'v1beta' },
-    { name: 'gemini-1.5-flash-latest', version: 'v1beta' },
-    { name: 'gemini-1.5-flash', version: 'v1' },
-    { name: 'gemini-1.5-flash', version: 'v1beta' },
-    { name: 'gemini-2.0-flash-exp', version: 'v1beta' },
-    { name: 'gemini-1.5-pro', version: 'v1beta' },
-    { name: 'gemini-pro', version: 'v1' }
+    'gemini-3.8-flash',
+    'gemini-3.5-flash',
+    'gemini-3.5-flash-lite',
+    'gemini-2.5-flash',
+    'gemini-3-flash',
+    'gemini-2.5-pro'
   ];
 
   try {
     let responseData = null;
     let lastError = null;
 
-    for (const { name: model, version } of candidateModels) {
+    for (const model of candidateModels) {
       try {
-        const url = `https://generativelanguage.googleapis.com/${version}/models/${model}:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         const geminiRes = await fetch(url, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': apiKey
+          },
           body: JSON.stringify({
             contents: [
               {
@@ -145,14 +147,13 @@ STRICT CONSTRAINTS:
           })
         });
 
-        if (!geminiRes.ok) {
+        if (geminiRes.ok) {
+          responseData = await geminiRes.json();
+          if (responseData) break;
+        } else {
           const errText = await geminiRes.text();
-          lastError = new Error(`Gemini API (${model} / ${version}) failed with status ${geminiRes.status}: ${errText}`);
-          continue;
+          lastError = new Error(`Gemini API (${model}) failed with status ${geminiRes.status}: ${errText}`);
         }
-
-        responseData = await geminiRes.json();
-        if (responseData) break;
       } catch (err) {
         lastError = err;
       }
@@ -161,7 +162,9 @@ STRICT CONSTRAINTS:
     // Dynamic discovery fallback if standard names all failed
     if (!responseData) {
       try {
-        const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        const listRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`, {
+          headers: { 'x-goog-api-key': apiKey }
+        });
         if (listRes.ok) {
           const listData = await listRes.json();
           const usable = listData.models?.filter(m =>
@@ -169,11 +172,16 @@ STRICT CONSTRAINTS:
             m.supportedGenerationMethods.includes('generateContent')
           );
           if (usable && usable.length > 0) {
-            const dynamicModel = usable[0].name.replace(/^models\//, '');
+            // Find a flash model or take the first usable
+            const chosen = usable.find(m => m.name.includes('flash')) || usable[0];
+            const dynamicModel = chosen.name.replace(/^models\//, '');
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${dynamicModel}:generateContent?key=${apiKey}`;
             const dynRes = await fetch(url, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': apiKey
+              },
               body: JSON.stringify({
                 contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\nACTIVE UPCOMING EVENTS:\n${eventSummaries}` }] }],
                 generationConfig: { temperature: 0.2, maxOutputTokens: 300 }
