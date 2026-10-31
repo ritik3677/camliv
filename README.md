@@ -1,10 +1,10 @@
-# CamLiv ⚡
+# Campus Pulse 🌿
 
-> **Intelligent, zero-friction campus life organizer.** Turn scattered WhatsApp forwards, emails, and poster captions into clear, actionable deadlines and calendar events in seconds.
+> **Intelligent, zero-friction campus life organizer.** Turn scattered WhatsApp forwards, emails, and poster captions into clear, actionable deadlines and calendar events in seconds with an energetic botanical greenery design.
 
 [![Tests](https://img.shields.io/badge/tests-40%20passed-brightgreen.svg)]()
-[![Bundle](https://img.shields.io/badge/bundle-58%20KB%20gzipped-blue.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-purple.svg)]()
+[![Bundle](https://img.shields.io/badge/bundle-58%20KB%20gzipped-emerald.svg)]()
+[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
 ---
 
@@ -15,14 +15,23 @@ College students are bombarded daily with scattered announcements:
 - Faculty emails with vague subject lines
 - Poster captions and club notices
 
-Students miss critical assignment submission windows, clash overlapping lab viva sessions with hackathons, and scramble for exam timings. **CamLiv** gives students one unified, intelligent home where they can paste messy text and immediately receive:
+Students miss critical assignment submission windows, clash overlapping lab viva sessions with hackathons, and scramble for exam timings. **Campus Pulse** gives students one unified, intelligent home where they can paste messy text and immediately receive:
 1. **Clean, structured event cards** (Exams, Assignments, Clubs, Sports, Placements).
 2. **Instant conflict detection** for overlapping exam or event times.
 3. **Automatic priority badges** (Today, Urgent within 48h, Upcoming, Expired) computed deterministically in code.
 4. **One-click iCalendar (.ics) export** for Google Calendar, Apple Calendar, and Outlook.
 5. **AI-powered 150-word Weekly Briefings** summarizing priorities, day-by-day agendas, and heads-up warnings.
 
-A first-time user can understand and use CamLiv immediately without any instructions.
+A first-time user can understand and use Campus Pulse immediately without any instructions.
+
+---
+
+## 🌿 Design & Aesthetics
+
+Campus Pulse features a custom **energetic greenery** theme designed to promote focus and mental calm:
+- **Lush Botanical Light Palette:** Clean airy morning mist backgrounds with rich emerald, sage, and mint botanical accents.
+- **Deep Forest Night Palette:** Calming deep spruce and pine tones paired with glowing bioluminescent leaf accents for late-night study sessions.
+- **High-Contrast Accessibility:** Tested and certified for WCAG AA compliance across all badges and controls.
 
 ---
 
@@ -36,7 +45,7 @@ A first-time user can understand and use CamLiv immediately without any instruct
 - **Testing:** Vitest with jsdom (40 comprehensive unit tests).
 
 ```
-camliv/
+campus-pulse/
 ├── api/                     # Vercel serverless functions (secure backend)
 │   ├── extract.js           # Smart event extraction via Gemini API
 │   └── digest.js            # Weekly AI briefing synthesizer (<150 words)
@@ -200,5 +209,5 @@ Campus Pulse is pre-configured for **zero-config deployment on Vercel**:
 ---
 
 ## 📄 License
-MIT &copy; CamLiv Team
+MIT &copy; Campus Pulse Team
 

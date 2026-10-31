@@ -150,7 +150,7 @@ export default function App() {
 
   const handleExportAll = useCallback(() => {
     if (filteredEvents.length === 0) return;
-    downloadIcsFile(filteredEvents, 'camliv-schedule.ics');
+    downloadIcsFile(filteredEvents, 'campus-pulse-schedule.ics');
     setToastMessage(`Exported ${filteredEvents.length} event(s) to .ics file.`);
   }, [filteredEvents]);
 
@@ -256,7 +256,7 @@ export default function App() {
                 <span className="empty-icon" aria-hidden="true">📭</span>
                 <h3 className="empty-title">
                   {events.length === 0
-                    ? 'Your CamLiv pulse is clear!'
+                    ? 'Your Campus Pulse is clear!'
                     : 'No matching events found'}
                 </h3>
                 <p className="empty-description">

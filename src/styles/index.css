@@ -3,42 +3,42 @@
    ========================================================================== */
 
 :root {
-  /* Light theme palette */
-  --bg-base: #f8fafc;
+  /* Lush Botanical Greenery - Light Theme */
+  --bg-base: #f3f7f4;
   --bg-surface: #ffffff;
   --bg-surface-elevated: #ffffff;
-  --bg-surface-secondary: #f1f5f9;
-  --bg-surface-tertiary: #e2e8f0;
+  --bg-surface-secondary: #e8f3ea;
+  --bg-surface-tertiary: #d6e8d9;
 
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
+  --text-primary: #0a2618;
+  --text-secondary: #19462d;
+  --text-muted: #4d735a;
   --text-inverse: #ffffff;
 
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-focus: #3b82f6;
+  --border-subtle: #d7e7dc;
+  --border-strong: #b8d4c0;
+  --border-focus: #10b981;
 
-  /* Accent & Category Colors */
-  --accent-primary: #2563eb;
-  --accent-primary-hover: #1d4ed8;
-  --accent-primary-light: #eff6ff;
+  /* Energetic Greenery Accents */
+  --accent-primary: #059669;
+  --accent-primary-hover: #047857;
+  --accent-primary-light: #ecfdf5;
 
-  --status-today-bg: #eff6ff;
-  --status-today-text: #1d4ed8;
-  --status-today-border: #93c5fd;
+  --status-today-bg: #ecfdf5;
+  --status-today-text: #047857;
+  --status-today-border: #6ee7b7;
 
-  --status-urgent-bg: #fff1f2;
-  --status-urgent-text: #be123c;
-  --status-urgent-border: #fecdd3;
+  --status-urgent-bg: #fff7ed;
+  --status-urgent-text: #c2410c;
+  --status-urgent-border: #fed7aa;
 
-  --status-upcoming-bg: #ecfdf5;
-  --status-upcoming-text: #047857;
-  --status-upcoming-border: #a7f3d0;
+  --status-upcoming-bg: #f0fdfa;
+  --status-upcoming-text: #0f766e;
+  --status-upcoming-border: #99f6e4;
 
-  --status-expired-bg: #f8fafc;
-  --status-expired-text: #64748b;
-  --status-expired-border: #cbd5e1;
+  --status-expired-bg: #f3f4f6;
+  --status-expired-text: #6b7280;
+  --status-expired-border: #d1d5db;
 
   --warning-bg: #fffbeb;
   --warning-text: #b45309;
@@ -49,10 +49,10 @@
   --danger-border: #fca5a5;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 2px 0 rgb(10 38 24 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(10 38 24 / 0.07), 0 2px 4px -2px rgb(10 38 24 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(10 38 24 / 0.08), 0 4px 6px -4px rgb(10 38 24 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(10 38 24 / 0.1), 0 8px 10px -6px rgb(10 38 24 / 0.04);
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -65,48 +65,49 @@
 }
 
 :root[data-theme="dark"] {
-  --bg-base: #090d16;
-  --bg-surface: #111827;
-  --bg-surface-elevated: #1f2937;
-  --bg-surface-secondary: #1e293b;
-  --bg-surface-tertiary: #334155;
+  /* Deep Forest Botanical - Dark Theme */
+  --bg-base: #06110a;
+  --bg-surface: #0c1c13;
+  --bg-surface-elevated: #12271c;
+  --bg-surface-secondary: #173224;
+  --bg-surface-tertiary: #1f4230;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --text-inverse: #0f172a;
+  --text-primary: #f0fdf4;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+  --text-inverse: #06110a;
 
-  --border-subtle: #1e293b;
-  --border-strong: #334155;
-  --border-focus: #60a5fa;
+  --border-subtle: #193827;
+  --border-strong: #245037;
+  --border-focus: #34d399;
 
-  --accent-primary: #3b82f6;
-  --accent-primary-hover: #60a5fa;
-  --accent-primary-light: rgba(59, 130, 246, 0.15);
+  --accent-primary: #10b981;
+  --accent-primary-hover: #34d399;
+  --accent-primary-light: rgba(16, 185, 129, 0.2);
 
-  --status-today-bg: rgba(59, 130, 246, 0.15);
-  --status-today-text: #93c5fd;
-  --status-today-border: rgba(59, 130, 246, 0.35);
+  --status-today-bg: rgba(16, 185, 129, 0.2);
+  --status-today-text: #6ee7b7;
+  --status-today-border: rgba(16, 185, 129, 0.45);
 
-  --status-urgent-bg: rgba(239, 68, 68, 0.15);
-  --status-urgent-text: #fca5a5;
-  --status-urgent-border: rgba(239, 68, 68, 0.35);
+  --status-urgent-bg: rgba(249, 115, 22, 0.2);
+  --status-urgent-text: #fdba74;
+  --status-urgent-border: rgba(249, 115, 22, 0.45);
 
-  --status-upcoming-bg: rgba(16, 185, 129, 0.15);
-  --status-upcoming-text: #6ee7b7;
-  --status-upcoming-border: rgba(16, 185, 129, 0.35);
+  --status-upcoming-bg: rgba(20, 184, 166, 0.2);
+  --status-upcoming-text: #5eead4;
+  --status-upcoming-border: rgba(20, 184, 166, 0.45);
 
-  --status-expired-bg: rgba(148, 163, 184, 0.1);
+  --status-expired-bg: rgba(148, 163, 184, 0.12);
   --status-expired-text: #94a3b8;
   --status-expired-border: rgba(148, 163, 184, 0.25);
 
-  --warning-bg: rgba(245, 158, 11, 0.15);
+  --warning-bg: rgba(245, 158, 11, 0.18);
   --warning-text: #fcd34d;
-  --warning-border: rgba(245, 158, 11, 0.35);
+  --warning-border: rgba(245, 158, 11, 0.4);
 
-  --danger-bg: rgba(239, 68, 68, 0.15);
+  --danger-bg: rgba(239, 68, 68, 0.18);
   --danger-text: #fca5a5;
-  --danger-border: rgba(239, 68, 68, 0.35);
+  --danger-border: rgba(239, 68, 68, 0.4);
 
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
@@ -177,14 +178,14 @@ body {
 .brand-icon {
   width: 44px;
   height: 44px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #059669, #10b981, #34d399);
   color: #ffffff;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
   flex-shrink: 0;
 }
 
@@ -274,16 +275,16 @@ body {
 }
 
 .btn-urgent-digest {
-  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  background: linear-gradient(135deg, #059669, #0d9488);
   color: #ffffff;
   border: none;
-  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
 }
 
 .btn-urgent-digest:hover:not(:disabled) {
   opacity: 0.95;
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.4);
 }
 
 .btn-icon-only {
@@ -414,8 +415,8 @@ body {
 
 /* Needs Attention Today section */
 .attention-section {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(245, 158, 11, 0.08));
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(245, 158, 11, 0.08));
+  border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: var(--radius-lg);
   padding: 1.25rem;
   margin-bottom: 2rem;
@@ -659,7 +660,7 @@ body {
 }
 
 .event-card.card-today {
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid var(--accent-primary);
 }
 
 .event-card.card-urgent {

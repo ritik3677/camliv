@@ -15,11 +15,11 @@ export default function Navbar({
     <header className="app-header" role="banner">
       <div className="brand-section">
         <div className="brand-icon" aria-hidden="true">
-          ⚡
+          🌿
         </div>
         <div>
           <h1 className="brand-title">
-            CamLiv
+            Campus Pulse
             <span className="badge-beta">v1.0</span>
           </h1>
           <p className="brand-subtitle">

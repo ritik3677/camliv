@@ -40,7 +40,7 @@ describe('iCalendar (.ics) Generation', () => {
 
     const vevent = generateVEvent(event, '20261031T120000Z');
     expect(vevent).toContain('BEGIN:VEVENT');
-    expect(vevent).toContain('UID:test-123@camliv.app');
+    expect(vevent).toContain('UID:test-123@campuspulse.app');
     expect(vevent).toContain('DTSTART:20261101T140000');
     expect(vevent).toContain('DTEND:20261101T150000');
     expect(vevent).toContain('SUMMARY:OS Midterm Exam');
@@ -72,7 +72,7 @@ describe('iCalendar (.ics) Generation', () => {
     const ics = generateIcsContent(event);
     expect(ics.startsWith('BEGIN:VCALENDAR')).toBe(true);
     expect(ics.endsWith('END:VCALENDAR')).toBe(true);
-    expect(ics).toContain('PRODID:-//CamLiv//Campus Event Organizer//EN');
+    expect(ics).toContain('PRODID:-//Campus Pulse//Campus Event Organizer//EN');
     expect(ics).toContain('VERSION:2.0');
     expect(ics).toContain('SUMMARY:Campus Hackathon');
   });

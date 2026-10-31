@@ -74,7 +74,7 @@ function getNextDayStr(dateStr) {
 export function generateVEvent(event, nowStamp = formatIcsTimestamp()) {
   if (!event) return '';
 
-  const uid = event.id ? `${event.id}@camliv.app` : `cl-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@camliv.app`;
+  const uid = event.id ? `${event.id}@campuspulse.app` : `cp-${Date.now()}-${Math.random().toString(36).slice(2, 8)}@campuspulse.app`;
   const lines = [
     'BEGIN:VEVENT',
     `UID:${uid}`,
@@ -111,7 +111,7 @@ export function generateVEvent(event, nowStamp = formatIcsTimestamp()) {
   if (event.uncertain_fields && event.uncertain_fields.length > 0) {
     descParts.push(`Note: Please verify ${event.uncertain_fields.join(', ')}.`);
   }
-  descParts.push('Organized with CamLiv');
+  descParts.push('Organized with Campus Pulse');
 
   lines.push(`DESCRIPTION:${escapeIcsText(descParts.join(' | '))}`);
 
@@ -137,7 +137,7 @@ export function generateIcsContent(events) {
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//CamLiv//Campus Event Organizer//EN',
+    'PRODID:-//Campus Pulse//Campus Event Organizer//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH'
   ];
@@ -177,7 +177,7 @@ export function downloadIcsFile(events, customFilename) {
   const icsString = generateIcsContent(events);
   const isMultiple = Array.isArray(events) && events.length > 1;
   const firstTitle = Array.isArray(events) ? (events[0]?.title || 'events') : (events?.title || 'event');
-  const filename = customFilename || (isMultiple ? 'camliv-schedule.ics' : getIcsFilename(firstTitle));
+  const filename = customFilename || (isMultiple ? 'campus-pulse-schedule.ics' : getIcsFilename(firstTitle));
 
   const blob = new Blob([icsString], { type: 'text/calendar;charset=utf-8' });
   const url = URL.createObjectURL(blob);

@@ -1,7 +1,7 @@
 {
-  "name": "camliv",
+  "name": "campus-pulse",
   "version": "1.0.0",
-  "description": "CamLiv - Intelligent campus life organizer for deadlines, notices, and events",
+  "description": "Campus Pulse - Intelligent campus life organizer for deadlines, notices, and events",
   "type": "module",
   "scripts": {
     "dev": "vite",
